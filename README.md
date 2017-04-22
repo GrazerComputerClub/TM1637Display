@@ -1,1 +1,4 @@
-# TM1637Display
+# TM1637Display Library
+
+Library for 4-Digit display with TM1637 chip  
+main.cpp is a example for the Library TM1637Display
