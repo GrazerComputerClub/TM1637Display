@@ -167,14 +167,14 @@ void TM1637Display::writeByte(BYTE data) {
 		digitalWrite(m_CLKPin, LOW);      
 		digitalWrite(m_DIOPin, (data & Mask) ? HIGH : LOW);
 		Mask <<= 1;      
-		usleep(1);
+//		usleep(1);
 		digitalWrite(m_CLKPin, HIGH);
+		usleep(1);
 	}  
-	usleep(1);
 	pinMode(m_DIOPin, INPUT);	 //switch DIO to input for ACK reading
 	digitalWrite(m_DIOPin, LOW); //reset DIO before set to output 
 	digitalWrite(m_CLKPin, LOW); //start ACK reading
-	for (int nReadTry=1; nReadTry<=10; nReadTry++) { //read/wait ACK (max. 10us)
+	for (int nReadTry=1; nReadTry<=100; nReadTry++) { //read/wait ACK (max. 100us)
 		if (HIGH==digitalRead(m_DIOPin)) { 
 			usleep(1);
 			if (10==nReadTry) {
@@ -194,6 +194,7 @@ void TM1637Display::start(void) { //start signal
   digitalWrite(m_CLKPin, HIGH);
   usleep(1);
   digitalWrite(m_DIOPin, HIGH); 
+  usleep(1);
   digitalWrite(m_DIOPin, LOW); 
   usleep(1);
   digitalWrite(m_CLKPin, LOW); 
@@ -203,6 +204,7 @@ void TM1637Display::stop(void) { //stop signal
   digitalWrite(m_CLKPin, LOW);
   usleep(1);
   digitalWrite(m_DIOPin, LOW);
+  usleep(1);
   digitalWrite(m_CLKPin, HIGH);
   usleep(1);
   digitalWrite(m_DIOPin, HIGH); 

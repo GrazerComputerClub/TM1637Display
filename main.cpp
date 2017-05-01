@@ -13,18 +13,19 @@ void UserInput(){
 }
 
 int main(int argc, char *argv[]) {
-	
+
 	TM1637Display display(23, 24, 60);	// CLK to GPIO 23 and DIO to GPIO 24, 60% brightness
 
 	printf("Test program for 4-Digit display with TM1637 chip (written by m.stroh)\n\n");
 
 	printf("Testing int values from -999 to 1199...\n");
 	UserInput();
-	for (int nValue=-999; nValue<=1199; nValue++) { 
+	for (int nValue=-999; nValue<=1199; nValue++) {
 		display.Show(nValue);
+		//usleep(10000);
 	}
-	
-	printf("\nTesting set single char and double point...\n");	
+
+	printf("\nTesting set single char and double point...\n");
 	UserInput();
 	display.Show(1, '2');
 	display.Show(2, '3');
@@ -37,9 +38,9 @@ int main(int argc, char *argv[]) {
 	display.ShowDoublePoint(true);
 	sleep(1);
 	display.ShowDoublePoint(false);
-	
 
-	printf("\nTesting set text...\n");		
+
+	printf("\nTesting set text...\n");
 	UserInput();
 	display.Show("HELO");
 	sleep(1);
@@ -50,13 +51,16 @@ int main(int argc, char *argv[]) {
 	display.Show("YOUR");
 	sleep(1);
 	display.Show("PI0 ");
-	
+
 	printf("\nTesting clear...\n");
-	UserInput();		
+	UserInput();
 	display.Clear();
-	
-	printf("\nTesting lower brightness...\n");			
-	UserInput();	
+
+	printf("\nTesting lower brightness...\n");
+	UserInput();
+	display.Show("100P");
+	display.SetBrightness(100);
+	sleep(1);
 	display.Show(" 80P");
 	display.SetBrightness(80);
 	sleep(1);
@@ -68,9 +72,9 @@ int main(int argc, char *argv[]) {
 	sleep(1);
 	display.Show(" 10P");
 	display.SetBrightness(10);
-	sleep(1);	
-	
-	printf("\nfinish...\n");			
+	sleep(1);
+
+	printf("\nfinish...\n");
 	UserInput();
 	display.Clear();
 }
