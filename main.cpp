@@ -18,10 +18,16 @@ int main(int argc, char *argv[]) {
 
   printf("Test program for 4-Digit display with TM1637 chip (written by m.stroh)\n\n");
 
+  printf("Testing int values from -999 to 9999...\n");
+  for (int nValue=-999; nValue<=9999; nValue++) {
+    display.Show(nValue);
+    usleep(100);
+  }
+  UserInput();
   printf("Testing int values from -999 to 1199...\n");
   for (int nValue=-999; nValue<=1199; nValue++) {
     display.Show(nValue);
-    //usleep(10000);
+    usleep(3000);
   }
 
   printf("\nTesting set single char and double point...\n");
@@ -37,7 +43,6 @@ int main(int argc, char *argv[]) {
   display.ShowDoublePoint(true);
   sleep(1);
   display.ShowDoublePoint(false);
-
 
   printf("\nTesting set text...\n");
   UserInput();

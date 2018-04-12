@@ -47,6 +47,7 @@ class TM1637Display {
     void stop(void);
     void Init7SegMap();
     BYTE GetSegCode(BYTE DigitNumber, const char Data); //char to binary code for display
+    void CLKWait();
 };
 #endif  // __TM1637Display__
 

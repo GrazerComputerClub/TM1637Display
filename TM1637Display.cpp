@@ -167,17 +167,17 @@ void TM1637Display::writeByte(BYTE data) {
         digitalWrite(m_CLKPin, LOW);
         digitalWrite(m_DIOPin, (data & Mask) ? HIGH : LOW);
         Mask <<= 1;
-//      usleep(1);
+//      CLKWait();
         digitalWrite(m_CLKPin, HIGH);
-        usleep(1);
+        CLKWait();
     }
     pinMode(m_DIOPin, INPUT);    //switch DIO to input for ACK reading
     digitalWrite(m_DIOPin, LOW); //reset DIO before set to output
     digitalWrite(m_CLKPin, LOW); //start ACK reading
     for (int nReadTry=1; nReadTry<=100; nReadTry++) { //read/wait ACK (max. 100us)
         if (HIGH==digitalRead(m_DIOPin)) {
-            usleep(1);
-            if (10==nReadTry) {
+            CLKWait();
+            if (100==nReadTry) {
                 fprintf(stderr, "no ACK received\n");
                 m_bACKErr = true;
             }
@@ -192,21 +192,21 @@ void TM1637Display::writeByte(BYTE data) {
 
 void TM1637Display::start(void) { //start signal
   digitalWrite(m_CLKPin, HIGH);
-  usleep(1);
+  CLKWait();
   digitalWrite(m_DIOPin, HIGH);
-  usleep(1);
+  CLKWait();
   digitalWrite(m_DIOPin, LOW);
-  usleep(1);
+  CLKWait();
   digitalWrite(m_CLKPin, LOW);
 }
 
 void TM1637Display::stop(void) { //stop signal
   digitalWrite(m_CLKPin, LOW);
-  usleep(1);
+  CLKWait();
   digitalWrite(m_DIOPin, LOW);
-  usleep(1);
+  CLKWait();
   digitalWrite(m_CLKPin, HIGH);
-  usleep(1);
+  CLKWait();
   digitalWrite(m_DIOPin, HIGH);
 }
 
@@ -219,4 +219,9 @@ BYTE TM1637Display::GetSegCode(BYTE DigitNumber, const char Data) { //char to bi
         SegCode &= ~TM1637::SegDP;
     }
     return SegCode;
+}
+
+void TM1637Display::CLKWait() {
+  delayMicroseconds(1);
+  //usleep(1);
 }
