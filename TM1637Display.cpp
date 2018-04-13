@@ -53,7 +53,8 @@ void TM1637Display::Init7SegMap() {
     m_Char2SegCode['O'] = SegE|SegG|SegC|SegD;
     m_Char2SegCode['P'] = SegA|SegB|SegF|SegG|SegE;
     m_Char2SegCode['R'] = SegG|SegE;
-    m_Char2SegCode['S'] = SegA|SegF|SegG|SegC|SegD;;
+    m_Char2SegCode['S'] = SegA|SegF|SegG|SegC|SegD;
+    m_Char2SegCode['T'] = SegF|SegG|SegE|SegD;
     m_Char2SegCode['U'] = /*SegF|*/SegE|SegD|/*SegB|*/SegC;
     m_Char2SegCode['Y'] = SegF|SegG|SegB|SegC|SegD;
     m_Char2SegCode['Z'] = SegA|SegB|SegG|SegE|SegD;

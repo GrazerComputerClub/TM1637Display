@@ -56,6 +56,12 @@ int main(int argc, char *argv[]) {
   sleep(1);
   display.Show("PI0 ");
 
+  printf("\nTesting set text 2...\n");
+  UserInput();
+  display.Show("tT;");
+  sleep(1);
+
+
   printf("\nTesting clear...\n");
   UserInput();
   display.Clear();
