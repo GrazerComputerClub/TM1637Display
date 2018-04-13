@@ -58,8 +58,15 @@ void TM1637Display::Init7SegMap() {
     m_Char2SegCode['U'] = /*SegF|*/SegE|SegD|/*SegB|*/SegC;
     m_Char2SegCode['Y'] = SegF|SegG|SegB|SegC|SegD;
     m_Char2SegCode['Z'] = SegA|SegB|SegG|SegE|SegD;
-    m_Char2SegCode['-'] = SegG;
+    m_Char2SegCode['-']  = SegG;
+    m_Char2SegCode['_']  = SegD;
     m_Char2SegCode['\''] = SegB;
+    m_Char2SegCode['"']  = SegF|SegB;
+    m_Char2SegCode[0xB0] = SegF|SegA|SegB|SegG; //Deg Sign ISO/IEC 8859-1
+    m_Char2SegCode['*']  = SegF|SegA|SegB|SegG; //Deg Sign replacement
+    m_Char2SegCode['\\'] = SegF|SegG|SegC;
+    m_Char2SegCode['/']  = SegE|SegG|SegB;
+    m_Char2SegCode['^']  = SegF|SegA|SegB;
 }
 
 TM1637Display::TM1637Display(BYTE CLKPin, BYTE DIOPin, BYTE BrightnessPercent) {

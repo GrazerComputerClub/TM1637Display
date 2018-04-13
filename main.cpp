@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
   sleep(1);
   display.ShowDoublePoint(false);
 
-  printf("\nTesting set text...\n");
+  printf("\nTesting text...\n");
   UserInput();
   display.Show("HELO");
   sleep(1);
@@ -56,10 +56,15 @@ int main(int argc, char *argv[]) {
   sleep(1);
   display.Show("PI0 ");
 
-  printf("\nTesting set text 2...\n");
+  printf("\nTesting special signs ...\n");
   UserInput();
-  display.Show("tT;");
-  sleep(1);
+  display.Show("\\/'\"");
+  UserInput();
+  display.Show("_^\xB0*"); // \xB0 Deg Sign
+  UserInput();
+  display.Show("TCPU");
+  sleep(2);
+  display.Show("54*C");
 
 
   printf("\nTesting clear...\n");
