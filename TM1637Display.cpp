@@ -1,5 +1,5 @@
 // Functions for 4-Digit display with TM1637 chip
-// Code Licence: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
+// Code Licence: MIT
 // written by m.stroh
 
 #include <wiringPi.h>
