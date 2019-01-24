@@ -1,6 +1,6 @@
 # TM1637Display Library
 von **Martin Strohmayer**   
-Licence: CC BY 4.0
+Licence: MIT
 
 
 Library for 4-Digit display with TM1637 chip  
