@@ -108,9 +108,11 @@ void TM1637Display::Show(const char* pData) {   // show up to 4 char
     start();
     writeByte(cnDisplayAddress);
     for (int DigitNumber=0; DigitNumber<nLen; DigitNumber++) {
+     CLKWait(); //---
         writeByte(GetSegCode(DigitNumber, pData[DigitNumber]));
     }
     for (int DigitNumber=nLen; DigitNumber<4; DigitNumber++) {
+     CLKWait(); //---
         writeByte(GetSegCode(DigitNumber, ' '));
     }
     stop();
@@ -129,6 +131,7 @@ void TM1637Display::Show(BYTE DigitNumber, const char Data) {   // show char at 
     stop();
     start();
     writeByte(cnDisplayAddress | DigitNumber);
+     CLKWait(); //---
     writeByte(GetSegCode(DigitNumber, Data));
     stop();
     start();
@@ -173,14 +176,16 @@ void TM1637Display::writeByte(BYTE data) {
 
     for (int nBit=0; nBit<8; nBit++) {
         digitalWrite(m_CLKPin, LOW);
+      //CLKWait(); //---
         digitalWrite(m_DIOPin, (data & Mask) ? HIGH : LOW);
         Mask <<= 1;
-//      CLKWait();
+      //CLKWait(); //---
         digitalWrite(m_CLKPin, HIGH);
         CLKWait();
     }
     pinMode(m_DIOPin, INPUT);    //switch DIO to input for ACK reading
-    digitalWrite(m_DIOPin, LOW); //reset DIO before set to output
+    //digitalWrite(m_DIOPin, LOW); //reset DIO before set to output
+    //  CLKWait(); //---
     digitalWrite(m_CLKPin, LOW); //start ACK reading
     for (int nReadTry=1; nReadTry<=100; nReadTry++) { //read/wait ACK (max. 100us)
         if (HIGH==digitalRead(m_DIOPin)) {
@@ -194,28 +199,34 @@ void TM1637Display::writeByte(BYTE data) {
         }
     }
     digitalWrite(m_CLKPin, HIGH);
+    digitalWrite(m_DIOPin, LOW); //reset DIO before set to output
     pinMode(m_DIOPin, OUTPUT);
+    //CLKWait(); //---
     digitalWrite(m_CLKPin, LOW);
 }
 
 void TM1637Display::start(void) { //start signal
+  //CLKWait(); // ---
   digitalWrite(m_CLKPin, HIGH);
-  CLKWait();
+  //CLKWait();
   digitalWrite(m_DIOPin, HIGH);
   CLKWait();
   digitalWrite(m_DIOPin, LOW);
-  CLKWait();
+  //CLKWait();
   digitalWrite(m_CLKPin, LOW);
+  //CLKWait(); // ---
 }
 
 void TM1637Display::stop(void) { //stop signal
+  //CLKWait(); //----
   digitalWrite(m_CLKPin, LOW);
-  CLKWait();
+  //CLKWait();
   digitalWrite(m_DIOPin, LOW);
   CLKWait();
   digitalWrite(m_CLKPin, HIGH);
-  CLKWait();
+  //CLKWait();
   digitalWrite(m_DIOPin, HIGH);
+  //CLKWait(); // ---
 }
 
 BYTE TM1637Display::GetSegCode(BYTE DigitNumber, const char Data) { //char to binary code for display
@@ -230,6 +241,5 @@ BYTE TM1637Display::GetSegCode(BYTE DigitNumber, const char Data) { //char to bi
 }
 
 void TM1637Display::CLKWait() {
-  delayMicroseconds(1);
-  //usleep(1);
+  usleep(1);
 }
