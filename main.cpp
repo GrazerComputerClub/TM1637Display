@@ -8,7 +8,7 @@
 #include <unistd.h>
 
 void UserInput(){
-  //printf("press enter...");
+  printf("press any key to start");
   getchar();
 }
 
@@ -18,16 +18,15 @@ int main(int argc, char *argv[]) {
 
   printf("Test program for 4-Digit display with TM1637 chip (written by m.stroh)\n\n");
 
-  printf("Testing int values from -999 to 9999...\n");
-  for (int nValue=-999; nValue<=9999; nValue++) {
-    display.Show(nValue);
-    usleep(100);
-  }
+  printf("Testing int values from 0 to 9999...\n");
   UserInput();
+  for (int nValue=0; nValue<=9999; nValue+=11) {
+    display.Show(nValue);
+  }
   printf("Testing int values from -999 to 1199...\n");
+  UserInput();
   for (int nValue=-999; nValue<=1199; nValue++) {
     display.Show(nValue);
-    usleep(3000);
   }
 
   printf("\nTesting set single char and double point...\n");
@@ -59,9 +58,9 @@ int main(int argc, char *argv[]) {
   printf("\nTesting special signs ...\n");
   UserInput();
   display.Show("\\/'\"");
-  UserInput();
+  sleep(2);
   display.Show("_^\xB0*"); // \xB0 Deg Sign
-  UserInput();
+  sleep(2);
   display.Show("TCPU");
   sleep(2);
   display.Show("54*C");
@@ -89,7 +88,6 @@ int main(int argc, char *argv[]) {
   display.SetBrightness(10);
   sleep(1);
 
-  printf("\nfinish...\n");
-  UserInput();
+  printf("\nfinished\n");
   display.Clear();
 }
