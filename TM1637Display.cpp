@@ -173,9 +173,10 @@ void TM1637Display::writeByte(BYTE data) {
 
     for (int nBit=0; nBit<8; nBit++) {
         digitalWrite(m_CLKPin, LOW);
+        CLKWait();
         digitalWrite(m_DIOPin, (data & Mask) ? HIGH : LOW);
         Mask <<= 1;
-//      CLKWait();
+        CLKWait();
         digitalWrite(m_CLKPin, HIGH);
         CLKWait();
     }
@@ -202,7 +203,7 @@ void TM1637Display::start(void) { //start signal
   digitalWrite(m_CLKPin, HIGH);
   CLKWait();
   digitalWrite(m_DIOPin, HIGH);
-  CLKWait();
+  //CLKWait();
   digitalWrite(m_DIOPin, LOW);
   CLKWait();
   digitalWrite(m_CLKPin, LOW);
@@ -212,7 +213,7 @@ void TM1637Display::stop(void) { //stop signal
   digitalWrite(m_CLKPin, LOW);
   CLKWait();
   digitalWrite(m_DIOPin, LOW);
-  CLKWait();
+  //CLKWait();
   digitalWrite(m_CLKPin, HIGH);
   CLKWait();
   digitalWrite(m_DIOPin, HIGH);
@@ -230,6 +231,6 @@ BYTE TM1637Display::GetSegCode(BYTE DigitNumber, const char Data) { //char to bi
 }
 
 void TM1637Display::CLKWait() {
-  delayMicroseconds(1);
-  //usleep(1);
+  //delayMicroseconds(1);
+  usleep(10);
 }
