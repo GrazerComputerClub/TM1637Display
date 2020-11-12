@@ -61,6 +61,8 @@ void TM1637Display::Init7SegMap() {
     m_Char2SegCode['Z'] = SegA|SegB|SegG|SegE|SegD;
     m_Char2SegCode['-']  = SegG;
     m_Char2SegCode['_']  = SegD;
+    m_Char2SegCode['.']  = SegD;
+    m_Char2SegCode[',']  = SegD;
     m_Char2SegCode['\''] = SegB;
     m_Char2SegCode['"']  = SegF|SegB;
     m_Char2SegCode[0xB0] = SegF|SegA|SegB|SegG; //Deg Sign ISO/IEC 8859-1
