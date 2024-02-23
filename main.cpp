@@ -1,6 +1,7 @@
 // Test program for 4-Digit display with TM1637 chip
 // Code Licence: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
-// written by m.stroh
+// Written by m.stroh
+// g++ -Wall -o TM1637Display main.cpp TM1637Display.cpp -lwiringPi
 
 #include "TM1637Display.h"
 #include <stdio.h>
