@@ -1,6 +1,7 @@
-// 2tm1637 program for 4-Digit display with TM1637 chip
+// 2display program for 4-Digit display with TM1637 chip
 // Code Licence: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
-// written by m.stroh
+// Written by m.stroh
+// Compile: g++ -Wall -o 2display 2display.cpp TM1637Display.cpp -lwiringPi
 
 #include "TM1637Display.h"
 #include <fcntl.h>
