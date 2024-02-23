@@ -186,19 +186,21 @@ void TM1637Display::writeByte(BYTE data) {
     pinMode(m_DIOPin, INPUT);    //switch DIO to input for ACK reading
     digitalWrite(m_DIOPin, LOW); //reset DIO before set to output
     digitalWrite(m_CLKPin, LOW); //start ACK reading
-    for (int nReadTry=1; nReadTry<=100; nReadTry++) { //read/wait ACK (max. 100us)
+    for (int nReadTry=1; nReadTry<=10; nReadTry++) { //read/wait ACK (max. 100us)
         if (HIGH==digitalRead(m_DIOPin)) {
             CLKWait();
-            if (100==nReadTry) {
+            if (10==nReadTry) {
                 fprintf(stderr, "no ACK received\n");
                 m_bACKErr = true;
             }
         } else {
+            //printf("ACK at %d received\n", nReadTry);
             break;
         }
     }
     digitalWrite(m_CLKPin, HIGH);
     pinMode(m_DIOPin, OUTPUT);
+    CLKWait();
     digitalWrite(m_CLKPin, LOW);
 }
 
