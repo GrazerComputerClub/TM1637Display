@@ -11,8 +11,9 @@
 int main(int argc, char *argv[]) {
 
   TM1637Display display(23, 24, 60);  // CLK to GPIO 23 and DIO to GPIO 24, 60% brightness
-
-  //printf("2tm1637 - set text to 4-Digit display with TM1637 chip (written by m.stroh)\n\n");
+  //display.ShowDoublePoint(true);
+  
+  //printf("2display - set text to 4-Digit display with TM1637 chip (written by m.stroh)\n\n");
   if (argc>1) { 
    display.Show(argv[1]);
   } else {
